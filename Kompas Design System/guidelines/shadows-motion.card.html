@@ -1,0 +1,28 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Shadows & motion" subtitle="Paper-soft warm-tinted elevation · calm easing" -->
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body{margin:0;}
+  body{background:var(--bg);font-family:var(--font-sans);color:var(--ink);padding:22px 24px;display:flex;gap:36px;}
+  .col{flex:1;}
+  .lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px;}
+  .sh{background:var(--surface);height:44px;border-radius:var(--r-3);border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 14px;margin-bottom:14px;font-size:12.5px;}
+  .sh .m{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);}
+  .mr{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-2);padding:5px 0;}
+  .mr .m{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);}
+</style></head>
+<body>
+  <div class="col">
+    <p class="lbl">Shadows</p>
+    <div class="sh" style="box-shadow:var(--shadow-1)"><span>Hover lift</span><span class="m">--shadow-1</span></div>
+    <div class="sh" style="box-shadow:var(--shadow-2)"><span>Card / dropdown</span><span class="m">--shadow-2</span></div>
+    <div class="sh" style="box-shadow:var(--shadow-3)"><span>Modal / overlay</span><span class="m">--shadow-3</span></div>
+  </div>
+  <div class="col">
+    <p class="lbl">Motion</p>
+    <div class="mr"><span>Hover / tint</span><span class="m">120ms ease</span></div>
+    <div class="mr"><span>Button / card lift</span><span class="m">150ms ease</span></div>
+    <div class="mr"><span>Modal / drawer</span><span class="m">220ms cubic-bezier</span></div>
+  </div>
+</body></html>

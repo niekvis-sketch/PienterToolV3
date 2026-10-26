@@ -1,0 +1,22 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Radii" subtitle="Subtle 4–12px corners · pill for badges & toggles" -->
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body{margin:0;}
+  body{background:var(--bg);font-family:var(--font-sans);color:var(--ink);padding:20px 24px;}
+  .grid{display:flex;gap:22px;}
+  .it{text-align:center;}
+  .box{width:72px;height:72px;background:var(--primary-soft);border:1px solid var(--primary-soft-2);}
+  .nm{margin-top:8px;font-size:12px;font-weight:500;}
+  .vn{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);}
+</style></head>
+<body>
+  <div class="grid">
+    <div class="it"><div class="box" style="border-radius:var(--r-1)"></div><div class="nm">r-1</div><div class="vn">4px</div></div>
+    <div class="it"><div class="box" style="border-radius:var(--r-2)"></div><div class="nm">r-2</div><div class="vn">6px</div></div>
+    <div class="it"><div class="box" style="border-radius:var(--r-3)"></div><div class="nm">r-3</div><div class="vn">8px</div></div>
+    <div class="it"><div class="box" style="border-radius:var(--r-4)"></div><div class="nm">r-4</div><div class="vn">12px</div></div>
+    <div class="it"><div class="box" style="border-radius:var(--r-pill)"></div><div class="nm">pill</div><div class="vn">999px</div></div>
+  </div>
+</body></html>

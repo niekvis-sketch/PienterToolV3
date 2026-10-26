@@ -1232,5 +1232,25 @@
     "entityId": "f6c73c4f",
     "entityTitle": "Nieuwe pagina",
     "details": "Pagina toegevoegd: https://example.com/nieuwe-pagina"
+  },
+  {
+    "id": "81d8199a",
+    "projectId": "08e09d70",
+    "timestamp": "2026-09-28T21:15:17.988Z",
+    "action": "block-added",
+    "entityType": "pageBlock",
+    "entityId": "bulk-import",
+    "entityTitle": "Import",
+    "details": "49 blokken geïmporteerd vanuit structuurbestand"
+  },
+  {
+    "id": "1d764b0a",
+    "projectId": "08e09d70",
+    "timestamp": "2026-09-28T21:15:17.989Z",
+    "action": "added",
+    "entityType": "siteNode",
+    "entityId": "bulk-import",
+    "entityTitle": "Import",
+    "details": "14 pagina's geïmporteerd vanuit structuurbestand"
   }
 ]

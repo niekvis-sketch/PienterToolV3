@@ -1,0 +1,29 @@
+<!-- @dsCard group="Brand" viewport="700x300" name="Kompas wordmark & principles" subtitle="Richting — rust, helderheid, subtiele accenten" -->
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body{margin:0;}
+  body{background:var(--bg);font-family:var(--font-sans);color:var(--ink);padding:28px 30px;}
+  .word{display:flex;align-items:center;gap:16px;}
+  .word img{height:58px;}
+  .word .ipa{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);}
+  p.lead{font-size:16px;line-height:1.45;color:var(--ink-2);max-width:540px;margin:18px 0 22px;}
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .sw{height:64px;border-radius:var(--r-3);position:relative;overflow:hidden;}
+  .sw span{position:absolute;left:12px;bottom:10px;font-family:var(--font-mono);font-size:12px;}
+  .sw small{position:absolute;left:12px;top:10px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-sans);}
+</style></head>
+<body>
+  <div class="word">
+    <img src="../assets/logo/kompas-logo.svg" alt="Kompas logo" />
+    <span class="ipa">/ˈkɔmpɑs/ — richting &amp; helderheid</span>
+  </div>
+  <p class="lead">Kompas — een rustig, zakelijk design system voor de Pienter-tool. Sage groen als hoofdkleur, zachte roze als decoratie, oranje als highlight — op een warme crème basis.</p>
+  <div class="swatches">
+    <div class="sw" style="background:var(--primary)"><small style="color:rgba(255,255,255,.8)">Primary</small><span style="color:#fff">#48B070</span></div>
+    <div class="sw" style="background:var(--accent)"><small style="color:rgba(42,24,32,.65)">Accent</small><span style="color:var(--on-accent)">#F6BDCA</span></div>
+    <div class="sw" style="background:var(--highlight)"><small style="color:rgba(255,255,255,.85)">Highlight</small><span style="color:#fff">#FFAB40</span></div>
+    <div class="sw" style="background:var(--bg);border:1px solid var(--line)"><small style="color:var(--ink-3)">Base</small><span style="color:var(--ink-2)">#F9F7F2</span></div>
+  </div>
+</body></html>

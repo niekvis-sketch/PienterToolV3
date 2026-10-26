@@ -1,0 +1,23 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Highlight & Status" subtitle="Amber highlight + warm-tinted success/warning/danger/info" -->
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body{margin:0;}
+  body{background:var(--bg);font-family:var(--font-sans);padding:20px 22px;}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+  .sw{height:74px;border-radius:var(--r-2);border:1px solid var(--line);position:relative;overflow:hidden;}
+  .hex{position:absolute;top:8px;left:10px;font-family:var(--font-mono);font-size:11px;}
+  .meta{margin-top:8px;}
+  .nm{font-size:12.5px;font-weight:500;color:var(--ink);}
+  .vn{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);}
+</style></head>
+<body>
+  <div class="grid">
+    <div><div class="sw" style="background:var(--highlight)"><span class="hex" style="color:#fff">#FFAB40</span></div><div class="meta"><div class="nm">Highlight</div><div class="vn">--highlight</div></div></div>
+    <div><div class="sw" style="background:var(--success)"><span class="hex" style="color:#fff">#1F8A5B</span></div><div class="meta"><div class="nm">Success</div><div class="vn">--success</div></div></div>
+    <div><div class="sw" style="background:var(--warning)"><span class="hex" style="color:#fff">#C77F3D</span></div><div class="meta"><div class="nm">Warning</div><div class="vn">--warning</div></div></div>
+    <div><div class="sw" style="background:var(--danger)"><span class="hex" style="color:#fff">#B83A3A</span></div><div class="meta"><div class="nm">Danger</div><div class="vn">--danger</div></div></div>
+    <div><div class="sw" style="background:var(--info)"><span class="hex" style="color:#fff">#3D6EB8</span></div><div class="meta"><div class="nm">Info</div><div class="vn">--info</div></div></div>
+  </div>
+</body></html>

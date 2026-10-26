@@ -1,0 +1,8 @@
+/* Kompas — Webfonts
+ * Poppins (sans / UI) + JetBrains Mono (data / mono), served from Google Fonts.
+ * These are the two real Kompas typefaces (confirmed in the Typografie spec).
+ * Consumers who link styles.css load them automatically.
+ * To ship fully offline, drop the .woff2 binaries into tokens/fonts/ and
+ * replace this @import with explicit @font-face rules.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
