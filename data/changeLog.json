@@ -1252,5 +1252,37 @@
     "entityId": "bulk-import",
     "entityTitle": "Import",
     "details": "14 pagina's geïmporteerd vanuit structuurbestand"
+  },
+  {
+    "id": "2d00a2cf",
+    "projectId": "08e09d70",
+    "timestamp": "2026-10-27T17:19:37.003Z",
+    "action": "added",
+    "entityType": "siteNode",
+    "entityId": "5b85b22b",
+    "entityTitle": "awdacawcwa",
+    "details": "Pagina toegevoegd: https://example.com/awdacawcwa"
+  },
+  {
+    "id": "928d9bb8",
+    "projectId": "08e09d70",
+    "timestamp": "2026-10-27T17:19:40.529Z",
+    "action": "added",
+    "entityType": "siteNode",
+    "entityId": "21002465",
+    "entityTitle": "concurrent 1",
+    "details": "Pagina toegevoegd: https://example.com/concurrent-1"
+  },
+  {
+    "id": "cb896350",
+    "projectId": "08e09d70",
+    "timestamp": "2026-10-27T17:33:34.291Z",
+    "action": "moved",
+    "entityType": "siteNode",
+    "entityId": "6da84b6d",
+    "entityTitle": "Home",
+    "details": "Verplaatst: https://example.com → https://example.com (0 subpagina's mee verplaatst)",
+    "oldValue": "https://example.com",
+    "newValue": "https://example.com"
   }
 ]

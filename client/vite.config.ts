@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 // Repo-naam = pad waarop GitHub Pages de project-site serveert.
-const REPO = 'PienterToolV2'
+const REPO = 'PienterToolV3'
 
 // Na de build index.html dupliceren naar 404.html (SPA-fallback voor
 // history-mode deep links) + .nojekyll zodat Pages /assets niet filtert.

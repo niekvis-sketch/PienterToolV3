@@ -419,7 +419,8 @@
     "metaDescription": "",
     "sortOrder": 10,
     "createdAt": "2026-09-27T12:00:00.000Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": "/ons-team"
   },
   {
     "id": "4ecd0186",
@@ -437,9 +438,10 @@
     "slug": "",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 0,
+    "sortOrder": 7,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "1ac0d4d5",
@@ -457,9 +459,10 @@
     "slug": "diensten",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 1,
+    "sortOrder": 0,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:50.575Z",
+    "oudeUrl": ""
   },
   {
     "id": "da67814b",
@@ -477,9 +480,10 @@
     "slug": "bedrijfscatering",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 2,
+    "sortOrder": 1,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "35b5e047",
@@ -497,9 +501,10 @@
     "slug": "zakelijke-lunches",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 3,
+    "sortOrder": 2,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "df3f68ab",
@@ -517,9 +522,10 @@
     "slug": "evenementencatering",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 4,
+    "sortOrder": 3,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "31fced43",
@@ -537,9 +543,10 @@
     "slug": "catering-onderwijs",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 5,
+    "sortOrder": 4,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "a6fff64a",
@@ -557,9 +564,10 @@
     "slug": "catering-overheid",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 6,
+    "sortOrder": 5,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "36dd4070",
@@ -577,9 +585,10 @@
     "slug": "menukaarten",
     "metaTitel": "",
     "metaDescription": "",
-    "sortOrder": 7,
+    "sortOrder": 6,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "63fbb0f8",
@@ -599,7 +608,8 @@
     "metaDescription": "",
     "sortOrder": 8,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "5f913a25",
@@ -619,7 +629,8 @@
     "metaDescription": "",
     "sortOrder": 9,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "e335789a",
@@ -639,7 +650,8 @@
     "metaDescription": "",
     "sortOrder": 11,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "55df1ca2",
@@ -659,7 +671,8 @@
     "metaDescription": "",
     "sortOrder": 12,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
   },
   {
     "id": "125a7278",
@@ -679,6 +692,51 @@
     "metaDescription": "",
     "sortOrder": 13,
     "createdAt": "2026-10-26T19:04:20.954Z",
-    "updatedAt": "2026-10-26T19:04:20.954Z"
+    "updatedAt": "2026-10-27T17:36:01.913Z",
+    "oudeUrl": ""
+  },
+  {
+    "id": "de4a5487",
+    "projectId": "08e09d70",
+    "siteNodeId": "5b85b22b",
+    "naamPagina": "awdacawcwa",
+    "zoektermen": "",
+    "tekstKlaar": false,
+    "wiePlaatstId": null,
+    "schrijverId": null,
+    "nakijkerId": null,
+    "klantControleur": "",
+    "status": "niet-gestart",
+    "watMistNog": "",
+    "oudeUrl": "",
+    "nieuweUrl": "https://example.com/awdacawcwa",
+    "slug": "awdacawcwa",
+    "metaTitel": "",
+    "metaDescription": "",
+    "sortOrder": 14,
+    "createdAt": "2026-10-27T17:36:01.913Z",
+    "updatedAt": "2026-10-27T17:36:01.913Z"
+  },
+  {
+    "id": "8e3e8a1f",
+    "projectId": "08e09d70",
+    "siteNodeId": "21002465",
+    "naamPagina": "concurrent 1",
+    "zoektermen": "",
+    "tekstKlaar": false,
+    "wiePlaatstId": null,
+    "schrijverId": null,
+    "nakijkerId": null,
+    "klantControleur": "",
+    "status": "niet-gestart",
+    "watMistNog": "",
+    "oudeUrl": "",
+    "nieuweUrl": "https://example.com/concurrent-1",
+    "slug": "concurrent-1",
+    "metaTitel": "",
+    "metaDescription": "",
+    "sortOrder": 15,
+    "createdAt": "2026-10-27T17:36:01.913Z",
+    "updatedAt": "2026-10-27T17:36:01.913Z"
   }
 ]

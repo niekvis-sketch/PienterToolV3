@@ -1,0 +1,111 @@
+{
+  "concurrenten": [
+    {
+      "id": "c3eb8ebe",
+      "projectId": "08e09d70",
+      "naam": "concurrent 1",
+      "url": "https://test.website",
+      "notitie": "",
+      "paginas": [
+        {
+          "id": "63388c54",
+          "naam": "Home",
+          "url": "",
+          "notitie": ""
+        },
+        {
+          "id": "ed4ec85d",
+          "naam": "Over ons",
+          "url": "",
+          "notitie": ""
+        },
+        {
+          "id": "fea1bbaf",
+          "naam": "Contact",
+          "url": "",
+          "notitie": ""
+        }
+      ],
+      "functies": [
+        {
+          "id": "0b10c670",
+          "naam": "Offerte aanvragen",
+          "notitie": ""
+        },
+        {
+          "id": "69ca78c3",
+          "naam": "Online afspraak",
+          "notitie": ""
+        }
+      ],
+      "createdAt": "2026-10-27T17:21:43.050Z",
+      "updatedAt": "2026-10-27T17:21:49.629Z"
+    },
+    {
+      "id": "5edc4562",
+      "projectId": "08e09d70",
+      "naam": "concurrent 2",
+      "url": "https://website.nl",
+      "notitie": "",
+      "paginas": [
+        {
+          "id": "d9c2c6f5",
+          "naam": "Home",
+          "url": "",
+          "notitie": ""
+        },
+        {
+          "id": "7d27fd98",
+          "naam": "Cases",
+          "url": "",
+          "notitie": ""
+        },
+        {
+          "id": "a5e0c2a0",
+          "naam": "Vacatures",
+          "url": "",
+          "notitie": ""
+        }
+      ],
+      "functies": [
+        {
+          "id": "a7716696",
+          "naam": "Configurator",
+          "notitie": ""
+        },
+        {
+          "id": "11689aee",
+          "naam": "Live chat",
+          "notitie": ""
+        },
+        {
+          "id": "d0276721",
+          "naam": "Reviews-widget",
+          "notitie": ""
+        }
+      ],
+      "createdAt": "2026-10-27T17:22:14.803Z",
+      "updatedAt": "2026-10-27T17:22:23.062Z"
+    }
+  ],
+  "doorzetten": [
+    {
+      "id": "877c605c",
+      "projectId": "08e09d70",
+      "type": "pagina",
+      "label": "awdacawcwa",
+      "doel": "structuur",
+      "targetId": "5b85b22b",
+      "doorgezetOp": "2026-10-27T17:19:37.007Z"
+    },
+    {
+      "id": "4e3ac9fa",
+      "projectId": "08e09d70",
+      "type": "pagina",
+      "label": "concurrent 1",
+      "doel": "structuur",
+      "targetId": "21002465",
+      "doorgezetOp": "2026-10-27T17:19:40.533Z"
+    }
+  ]
+}
