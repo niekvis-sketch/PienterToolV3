@@ -13,7 +13,7 @@
     <div v-if="store.doelgroepen.length === 0" class="empty-state card p-12">
       <div class="empty-state-icon"><KIcon name="target" :size="22" /></div>
       <h3 class="text-sm font-semibold text-gray-700">Nog geen doelgroepen</h3>
-      <p class="text-xs">Voeg een doelgroep toe en breng de klantvragen per journey-fase in kaart.</p>
+      <p class="text-xs">Voeg een doelgroep toe en breng de user stories per journey-fase in kaart.</p>
     </div>
 
     <!-- Doelgroep selector tabs -->

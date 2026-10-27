@@ -237,7 +237,9 @@ Fase 4 en 5 zijn placeholders.
 
 **Herbruikbare blokken**: een origineel heeft `isReusable: true` en `reusableBlockId: null`. Een kopie op een andere pagina verwijst via `reusableBlockId` naar het origineel. Wijzigingen aan het origineel neemt de server over in alle kopieën; in de UI zijn kopieën alleen-lezen. Verdwijnt het origineel, dan worden de kopieën zelfstandig.
 
-**Contentplanning** ([ContentStructuurTab.vue](client/src/components/tabs/ContentStructuurTab.vue)) heeft per pagina een schrijver en een nakijker. De statusflow is: Wordt geschreven → Nakijken door collega (`review`) → Goedgekeurd, mag naar klant (`klaar`). Bij openen wordt de tabel altijd gesynchroniseerd met de structuur; bestaande rijen zonder `siteNodeId` worden op paginanaam gekoppeld.
+**Contentplanning** ([ContentStructuurTab.vue](client/src/components/tabs/ContentStructuurTab.vue)) heeft per pagina een schrijver, een nakijker en een controleur bij de klant (`klantControleur`, vrije tekst). De statusflow is: Wordt geschreven → Nakijken door collega (`review`) → Pienterklaar, ligt bij klant (`klaar`) → Klantklaar (`klantklaar`). Bij openen wordt de tabel altijd gesynchroniseerd met de structuur; bestaande rijen zonder `siteNodeId` worden op paginanaam gekoppeld. De kolom Oude URL komt bij die sync uit `SiteNode.redirectsFrom`. De tabelkop blijft staan tijdens het scrollen (eigen scrollvlak).
+
+**Concurrenten** ([ConcurrentInvoer.vue](client/src/components/concurrenten/ConcurrentInvoer.vue)): velden slaan op bij verlaten. De knop Opslaan rechtsonder rondt openstaande invoer af, wacht op alle lopende opslagacties (`concurrentenStore.wachtOpOpslaan`) en toont "Opgeslagen".
 
 ---
 

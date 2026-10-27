@@ -31,28 +31,30 @@
       <span class="font-medium text-gray-600">Van tekst naar klant:</span>
       <span class="badge badge-neutral !h-5">Wordt geschreven</span><KIcon name="chevR" :size="12" />
       <span class="badge badge-warning !h-5">Nakijken door collega</span><KIcon name="chevR" :size="12" />
-      <span class="badge badge-success !h-5">Goedgekeurd, mag naar klant</span>
-      <span>Kies bij "Nakijken" ook wie de tekst nakijkt.</span>
+      <span class="badge badge-success !h-5">Pienterklaar, ligt bij klant</span><KIcon name="chevR" :size="12" />
+      <span class="badge badge-success !h-5">Klantklaar</span>
+      <span>Kies bij "Nakijken" wie de tekst nakijkt en bij "Pienterklaar" wie bij de klant controleert.</span>
     </p>
 
-    <!-- Spreadsheet tabel -->
-    <div class="bg-white rounded-xl border border-gray-200 overflow-x-auto">
-      <div v-if="syncMessage" class="px-4 py-3 text-sm text-green-700 bg-green-50 border-b border-green-100">
-        {{ syncMessage }}
-      </div>
+    <div v-if="syncMessage" class="mb-3 px-4 py-3 text-sm text-green-700 bg-green-50 border border-green-100 rounded-lg">
+      {{ syncMessage }}
+    </div>
+
+    <!-- Spreadsheet tabel: eigen scrollvlak zodat de kop blijft staan tijdens het scrollen -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-auto max-h-[calc(100vh-260px)]">
       <table class="w-full text-sm">
-        <thead>
+        <thead class="sticky top-0 z-10">
           <tr class="bg-gray-50 border-b border-gray-200">
-            <th class="px-2 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-8">#</th>
+            <th class="px-2 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-8 bg-gray-50">#</th>
             <th
               v-for="col in visibleColumns"
               :key="col.key"
-              class="px-3 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap"
+              class="px-3 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap bg-gray-50"
               :class="col.width"
             >
               {{ col.label }}
             </th>
-            <th class="px-2 py-3 w-10"></th>
+            <th class="px-2 py-3 w-10 bg-gray-50"></th>
           </tr>
         </thead>
         <tbody>
@@ -144,6 +146,17 @@
               />
             </td>
 
+            <!-- Controleur bij de klant -->
+            <td v-if="isVisible('klantControleur')" class="px-1 py-1">
+              <input
+                v-model="row.klantControleur"
+                @blur="saveRow(row)"
+                class="w-full px-2 py-1.5 text-sm border-0 bg-transparent hover:bg-gray-50 focus:bg-white focus:ring-1 focus:ring-pienter-500 rounded"
+                :class="{ 'ring-2 ring-amber-400': row.status === 'klaar' && !row.klantControleur }"
+                :title="row.status === 'klaar' && !row.klantControleur ? 'Vul in wie bij de klant deze tekst controleert' : undefined"
+                placeholder="Naam bij klant..."
+              />
+            </td>
 
             <!-- Wat mist nog -->
             <td v-if="isVisible('watMistNog')" class="px-1 py-1">
@@ -152,6 +165,16 @@
                 @blur="saveRow(row)"
                 class="w-full px-2 py-1.5 text-sm border-0 bg-transparent hover:bg-gray-50 focus:bg-white focus:ring-1 focus:ring-pienter-500 rounded"
                 placeholder="Wat mist..."
+              />
+            </td>
+
+            <!-- Oude URL -->
+            <td v-if="isVisible('oudeUrl')" class="px-1 py-1">
+              <input
+                v-model="row.oudeUrl"
+                @blur="saveRow(row)"
+                class="w-full px-2 py-1.5 text-sm border-0 bg-transparent hover:bg-gray-50 focus:bg-white focus:ring-1 focus:ring-pienter-500 rounded"
+                placeholder="/oude-url"
               />
             </td>
 
@@ -313,18 +336,21 @@ import MedewerkerSelect from '../medewerkers/MedewerkerSelect.vue'
 import { useMedewerkersStore } from '../../stores/medewerkersStore'
 import type { ContentRowStatus } from '@shared/types'
 
-// Statusflow van een tekst: schrijven → nakijken door een collega → goedgekeurd (naar klant).
+// Statusflow van een tekst: schrijven → nakijken door een collega → pienterklaar
+// (ligt bij de klant) → klantklaar (klant is akkoord).
 const STATUSES: { value: ContentRowStatus; label: string }[] = [
   { value: 'niet-gestart', label: 'Niet gestart' },
   { value: 'in-progress', label: 'Wordt geschreven' },
   { value: 'review', label: 'Nakijken door collega' },
-  { value: 'klaar', label: 'Goedgekeurd, mag naar klant' },
+  { value: 'klaar', label: 'Pienterklaar, ligt bij klant' },
+  { value: 'klantklaar', label: 'Klantklaar' },
 ]
 const STATUS_CLASS: Record<ContentRowStatus, string> = {
   'niet-gestart': 'bg-transparent text-gray-600',
   'in-progress': 'bg-gray-100 text-gray-800',
   review: 'bg-amber-50 text-amber-800',
   klaar: 'bg-green-50 text-green-800',
+  klantklaar: 'bg-green-100 text-green-900 font-medium',
 }
 // Kolommen met een medewerker: sleutel → veld met het medewerker-id.
 const PERSON_FIELDS: Record<string, 'schrijverId' | 'nakijkerId' | 'wiePlaatstId'> = {
@@ -348,7 +374,9 @@ const allColumns = [
   { key: 'wiePlaatst', label: 'Wie plaatst op site', width: 'min-w-[140px]' },
   { key: 'status', label: 'Status', width: 'min-w-[190px]' },
   { key: 'nakijker', label: 'Nakijker', width: 'min-w-[140px]' },
+  { key: 'klantControleur', label: 'Controleur klant', width: 'min-w-[160px]' },
   { key: 'watMistNog', label: 'Wat mist nog', width: 'min-w-[160px]' },
+  { key: 'oudeUrl', label: 'Oude URL', width: 'min-w-[160px]' },
   { key: 'nieuweUrl', label: 'Nieuwe URL', width: 'min-w-[160px]' },
   { key: 'slug', label: 'Slug', width: 'min-w-[120px]' },
   { key: 'metaTitel', label: 'Meta titel', width: 'min-w-[180px]' },

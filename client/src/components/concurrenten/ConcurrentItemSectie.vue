@@ -130,6 +130,12 @@ function doAdd() {
   newUrl.value = ''
 }
 
+// Opslaan-knop: voeg een getypt maar nog niet toegevoegd item alsnog toe.
+function commitPending() {
+  if (newNaam.value.trim()) doAdd()
+}
+defineExpose({ commitPending })
+
 function quickAdd(naam: string) {
   if (isPresent(naam)) return
   emit('add', naam)

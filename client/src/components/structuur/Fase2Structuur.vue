@@ -4,10 +4,10 @@
     <div class="flex items-center justify-between">
       <div>
         <h3 class="text-lg font-bold text-gray-900">Fase 2 · Websitestructuur & Navigatie</h3>
-        <p class="text-sm text-gray-500 mt-1">Bouw het menu visueel op. Kopieer de klantvragen naar ChatGPT en importeer de gegenereerde structuur inclusief pagina-indeling.</p>
+        <p class="text-sm text-gray-500 mt-1">Bouw het menu visueel op. Kopieer de user stories naar ChatGPT en importeer de gegenereerde structuur inclusief pagina-indeling.</p>
       </div>
       <div class="flex gap-2">
-        <button class="btn-secondary btn-sm" @click="copyVragenToClipboard"><KIcon name="copy" :size="14" />Kopieer klantvragen</button>
+        <button class="btn-secondary btn-sm" @click="copyVragenToClipboard"><KIcon name="copy" :size="14" />Kopieer user stories</button>
         <button class="btn-secondary btn-sm" @click="toggleImport"><KIcon name="upload" :size="14" />Importeren</button>
         <button class="btn-secondary btn-sm" @click="fetchWarnings"><KIcon name="refresh" :size="14" />Structuur controleren</button>
         <button class="btn-primary btn-sm" @click="addRootNode"><KIcon name="plus" :size="14" />Pagina toevoegen</button>
@@ -266,7 +266,7 @@ async function copyVragenToClipboard() {
   }
 
   lines.push('=== OPDRACHT ===')
-  lines.push('Maak op basis van bovenstaande doelgroepen, klantvragen en componenten een websitestructuur met per pagina een blok-indeling.')
+  lines.push('Maak op basis van bovenstaande doelgroepen, user stories en componenten een websitestructuur met per pagina een blok-indeling.')
   lines.push('Belangrijk: De waarde voor "type" of "componentPattern" van een blok MOET overeenkomen met exact één van de componentnamen uit de lijst hierboven.')
   lines.push('Geef het resultaat terug als JSON in exact dit formaat:')
   lines.push('{')
@@ -300,7 +300,7 @@ async function copyVragenToClipboard() {
 
   try {
     await navigator.clipboard.writeText(text)
-    copySuccess.value = `Klantvragen van ${projectStore.doelgroepen.length} doelgroep(en) gekopieerd! Plak dit in ChatGPT om een structuur te genereren.`
+    copySuccess.value = `User stories van ${projectStore.doelgroepen.length} doelgroep(en) gekopieerd. Plak dit in ChatGPT om een structuur te genereren.`
     setTimeout(() => { copySuccess.value = '' }, 5000)
   } catch {
     const textarea = document.createElement('textarea')
@@ -309,7 +309,7 @@ async function copyVragenToClipboard() {
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
-    copySuccess.value = 'Klantvragen gekopieerd naar klembord!'
+    copySuccess.value = 'User stories gekopieerd naar klembord.'
     setTimeout(() => { copySuccess.value = '' }, 5000)
   }
 }

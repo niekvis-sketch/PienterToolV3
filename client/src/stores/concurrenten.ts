@@ -107,6 +107,19 @@ export const useConcurrentenStore = defineStore('concurrenten', () => {
     return `/projects/${projectId.value}/concurrenten`
   }
 
+  // Lopende opslagacties, zodat de Opslaan-knop kan wachten tot alles binnen is.
+  const lopend = new Set<Promise<unknown>>()
+  function track<T>(p: Promise<T>): Promise<T> {
+    lopend.add(p)
+    p.finally(() => lopend.delete(p)).catch(() => {})
+    return p
+  }
+  // true = alle lopende opslagacties zijn gelukt.
+  async function wachtOpOpslaan(): Promise<boolean> {
+    const results = await Promise.allSettled([...lopend])
+    return results.every(r => r.status === 'fulfilled')
+  }
+
   // --- Load ---
   async function fetch(pid: string) {
     projectId.value = pid
@@ -140,7 +153,7 @@ export const useConcurrentenStore = defineStore('concurrenten', () => {
 
   async function updateConcurrent(id: string, patch: Partial<Pick<Concurrent, 'naam' | 'url' | 'notitie'>>) {
     try {
-      const c = await apiFetch<Concurrent>('PATCH', `${base()}/${id}`, patch)
+      const c = await track(apiFetch<Concurrent>('PATCH', `${base()}/${id}`, patch))
       const idx = concurrenten.value.findIndex(x => x.id === id)
       if (idx >= 0) concurrenten.value[idx] = c
       return c
@@ -160,14 +173,14 @@ export const useConcurrentenStore = defineStore('concurrenten', () => {
   // --- Pagina's ---
   async function addPagina(concurrentId: string, naam: string, url?: string, notitie?: string) {
     try {
-      const p = await apiFetch<ConcurrentPagina>('POST', `${base()}/${concurrentId}/paginas`, { naam, url, notitie })
+      const p = await track(apiFetch<ConcurrentPagina>('POST', `${base()}/${concurrentId}/paginas`, { naam, url, notitie }))
       concurrenten.value.find(c => c.id === concurrentId)?.paginas.push(p)
       return p
     } catch (e) { setError(e); throw e }
   }
   async function updatePagina(concurrentId: string, paginaId: string, patch: Partial<ConcurrentPagina>) {
     try {
-      const p = await apiFetch<ConcurrentPagina>('PATCH', `${base()}/${concurrentId}/paginas/${paginaId}`, patch)
+      const p = await track(apiFetch<ConcurrentPagina>('PATCH', `${base()}/${concurrentId}/paginas/${paginaId}`, patch))
       const c = concurrenten.value.find(x => x.id === concurrentId)
       const idx = c?.paginas.findIndex(x => x.id === paginaId) ?? -1
       if (c && idx >= 0) c.paginas[idx] = p
@@ -192,14 +205,14 @@ export const useConcurrentenStore = defineStore('concurrenten', () => {
   // --- Functies ---
   async function addFunctie(concurrentId: string, naam: string, notitie?: string) {
     try {
-      const f = await apiFetch<ConcurrentFunctie>('POST', `${base()}/${concurrentId}/functies`, { naam, notitie })
+      const f = await track(apiFetch<ConcurrentFunctie>('POST', `${base()}/${concurrentId}/functies`, { naam, notitie }))
       concurrenten.value.find(c => c.id === concurrentId)?.functies.push(f)
       return f
     } catch (e) { setError(e); throw e }
   }
   async function updateFunctie(concurrentId: string, functieId: string, patch: Partial<ConcurrentFunctie>) {
     try {
-      const f = await apiFetch<ConcurrentFunctie>('PATCH', `${base()}/${concurrentId}/functies/${functieId}`, patch)
+      const f = await track(apiFetch<ConcurrentFunctie>('PATCH', `${base()}/${concurrentId}/functies/${functieId}`, patch))
       const c = concurrenten.value.find(x => x.id === concurrentId)
       const idx = c?.functies.findIndex(x => x.id === functieId) ?? -1
       if (c && idx >= 0) c.functies[idx] = f
@@ -299,7 +312,7 @@ export const useConcurrentenStore = defineStore('concurrenten', () => {
     geselecteerdeConcurrent, totaal, bestaandePaginaLabels, bestaandeFunctieLabels,
     paginaAggregaat, functieAggregaat,
     // Actions
-    fetch,
+    fetch, wachtOpOpslaan,
     addConcurrent, updateConcurrent, deleteConcurrent,
     addPagina, updatePagina, deletePagina, bulkPaginas,
     addFunctie, updateFunctie, deleteFunctie, bulkFuncties,

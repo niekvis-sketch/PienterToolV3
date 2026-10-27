@@ -479,7 +479,8 @@ export interface Medewerker {
 }
 
 // ---------- Content Structuur Document ----------
-export type ContentRowStatus = 'niet-gestart' | 'in-progress' | 'klaar' | 'review'
+// 'klaar' = pienterklaar (ligt bij de klant), 'klantklaar' = klant is akkoord.
+export type ContentRowStatus = 'niet-gestart' | 'in-progress' | 'review' | 'klaar' | 'klantklaar'
 
 export interface ContentStructuurRow {
   id: string
@@ -491,12 +492,14 @@ export interface ContentStructuurRow {
   wiePlaatstId: string | null
   schrijverId?: string | null   // wie schrijft de tekst
   nakijkerId?: string | null    // collega die de tekst nakijkt vóór de klant hem ziet
+  klantControleur?: string      // wie bij de klant de tekst controleert (vrije tekst)
   // Tijdens migratie: oude vrije-tekst waarden bewaard zodat ze handmatig
   // omgezet kunnen worden naar wiePlaatstId. Mag in latere fase verwijderd
   // worden zodra alle rijen gekoppeld zijn.
   wiePlaatstLegacy?: string
   status: ContentRowStatus
   watMistNog: string
+  oudeUrl?: string              // oude URL('s), overgenomen uit SiteNode.redirectsFrom
   nieuweUrl: string
   slug: string
   metaTitel: string

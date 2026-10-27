@@ -66,8 +66,10 @@ contentStructuurRouter.post('/:projectId', (req: Request, res: Response) => {
     wiePlaatstId: req.body.wiePlaatstId ?? null,
     schrijverId: req.body.schrijverId ?? null,
     nakijkerId: req.body.nakijkerId ?? null,
+    klantControleur: req.body.klantControleur ?? '',
     status: req.body.status ?? 'niet-gestart',
     watMistNog: req.body.watMistNog ?? '',
+    oudeUrl: req.body.oudeUrl ?? '',
     nieuweUrl: req.body.nieuweUrl ?? '',
     slug: req.body.slug ?? '',
     metaTitel: req.body.metaTitel ?? '',
@@ -88,7 +90,7 @@ contentStructuurRouter.put('/:projectId/:rowId', (req: Request, res: Response) =
   const idx = all.findIndex(r => r.id === req.params.rowId && r.projectId === req.params.projectId)
   if (idx < 0) { res.status(404).json(err('Rij niet gevonden')); return }
 
-  const updatable = ['siteNodeId', 'naamPagina', 'zoektermen', 'tekstKlaar', 'wiePlaatstId', 'wiePlaatstLegacy', 'schrijverId', 'nakijkerId', 'status', 'watMistNog', 'nieuweUrl', 'slug', 'metaTitel', 'metaDescription', 'sortOrder'] as const
+  const updatable = ['siteNodeId', 'naamPagina', 'zoektermen', 'tekstKlaar', 'wiePlaatstId', 'wiePlaatstLegacy', 'schrijverId', 'nakijkerId', 'klantControleur', 'status', 'watMistNog', 'oudeUrl', 'nieuweUrl', 'slug', 'metaTitel', 'metaDescription', 'sortOrder'] as const
   for (const key of updatable) {
     if (req.body[key] !== undefined) {
       ;(all[idx] as any)[key] = req.body[key]
@@ -138,8 +140,10 @@ contentStructuurRouter.post('/:projectId/bulk', (req: Request, res: Response) =>
       wiePlaatstId: row.wiePlaatstId ?? null,
       schrijverId: row.schrijverId ?? null,
       nakijkerId: row.nakijkerId ?? null,
+      klantControleur: row.klantControleur ?? '',
       status: row.status ?? 'niet-gestart',
       watMistNog: row.watMistNog ?? '',
+      oudeUrl: row.oudeUrl ?? '',
       nieuweUrl: row.nieuweUrl ?? '',
       slug: row.slug ?? '',
       metaTitel: row.metaTitel ?? '',
@@ -176,6 +180,7 @@ contentStructuurRouter.post('/:projectId/sync-from-structuur', (req: Request, re
 
   siteNodes.forEach((node, index) => {
     const naamPagina = node.title
+    const oudeUrl = (node.redirectsFrom ?? []).join(', ')
     const existing = rowsByNodeId.get(node.id)
       || projectRows.find(row => !row.siteNodeId && (
         row.naamPagina === node.title
@@ -186,6 +191,7 @@ contentStructuurRouter.post('/:projectId/sync-from-structuur', (req: Request, re
     if (existing) {
       existing.siteNodeId = node.id
       existing.naamPagina = naamPagina
+      existing.oudeUrl = oudeUrl || existing.oudeUrl || ''
       existing.nieuweUrl = node.fullUrl || existing.nieuweUrl
       existing.slug = node.slug || existing.slug
       existing.metaTitel = node.metaTitle || existing.metaTitel
@@ -206,8 +212,10 @@ contentStructuurRouter.post('/:projectId/sync-from-structuur', (req: Request, re
       wiePlaatstId: null,
       schrijverId: null,
       nakijkerId: null,
+      klantControleur: '',
       status: 'niet-gestart',
       watMistNog: '',
+      oudeUrl,
       nieuweUrl: node.fullUrl || '',
       slug: node.slug || '',
       metaTitel: node.metaTitle || '',

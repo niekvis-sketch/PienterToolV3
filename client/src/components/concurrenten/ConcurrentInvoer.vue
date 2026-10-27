@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-16">
     <!-- Lege staat -->
     <div v-if="store.concurrenten.length === 0" class="empty-state card p-12 text-center">
       <div class="empty-state-icon"><KIcon name="building" :size="22" /></div>
@@ -65,6 +65,7 @@
 
         <!-- Pagina's -->
         <ConcurrentItemSectie
+          ref="paginaSectie"
           titel="Pagina's"
           icon="file"
           met-url
@@ -81,6 +82,7 @@
 
         <!-- Functionaliteit -->
         <ConcurrentItemSectie
+          ref="functieSectie"
           titel="Functionaliteit"
           icon="settings"
           :items="sel.functies"
@@ -100,6 +102,21 @@
           <button class="btn-secondary btn-sm" disabled title="Nog niet beschikbaar — gebruik voor nu de plakken-import">Uit URL ophalen</button>
         </div>
       </section>
+    </div>
+
+    <!-- Opslaan, rechtsonder -->
+    <div v-if="sel" class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+      <div
+        v-if="saveMelding"
+        role="status"
+        class="px-3 py-2 rounded-lg text-sm shadow-md inline-flex items-center gap-1.5 border"
+        :class="saveMelding.ok ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-700'"
+      >
+        <KIcon :name="saveMelding.ok ? 'checkCircle' : 'close'" :size="16" />{{ saveMelding.tekst }}
+      </div>
+      <button class="btn-primary shadow-md" :disabled="saving" @click="opslaan">
+        <KIcon name="check" :size="16" />{{ saving ? 'Opslaan…' : 'Opslaan' }}
+      </button>
     </div>
 
     <!-- Modals -->
@@ -133,7 +150,7 @@
 
 <script setup lang="ts">
 import KIcon from '../ui/KIcon.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useConcurrentenStore } from '../../stores/concurrenten'
 import type { Concurrent } from '@shared/types'
 import { faviconUrl } from './urlUtils'
@@ -147,6 +164,29 @@ const editConcurrent = ref<Concurrent | null>(null)
 const confirmDelete = ref(false)
 
 const sel = computed(() => store.geselecteerdeConcurrent)
+
+// Velden slaan op bij verlaten; de Opslaan-knop rondt openstaande invoer af,
+// wacht tot alles bij de server is en bevestigt dat met een melding.
+const paginaSectie = ref<InstanceType<typeof ConcurrentItemSectie> | null>(null)
+const functieSectie = ref<InstanceType<typeof ConcurrentItemSectie> | null>(null)
+const saving = ref(false)
+const saveMelding = ref<{ ok: boolean; tekst: string } | null>(null)
+let meldingTimer: ReturnType<typeof setTimeout> | null = null
+
+async function opslaan() {
+  saving.value = true
+  ;(document.activeElement as HTMLElement | null)?.blur()
+  paginaSectie.value?.commitPending()
+  functieSectie.value?.commitPending()
+  await nextTick()
+  const ok = await store.wachtOpOpslaan()
+  saving.value = false
+  saveMelding.value = ok
+    ? { ok: true, tekst: 'Opgeslagen' }
+    : { ok: false, tekst: 'Opslaan is niet gelukt. Probeer het opnieuw.' }
+  if (meldingTimer) clearTimeout(meldingTimer)
+  meldingTimer = setTimeout(() => { saveMelding.value = null }, 3000)
+}
 
 const quickPaginas = ['Home', 'Diensten', 'Over ons', 'Cases', 'Contact', 'Blog', 'Vacatures']
 const quickFuncties = ['Offerte aanvragen', 'Configurator', 'Klantportaal', 'Online afspraak', 'Live chat', 'Reviews-widget']
