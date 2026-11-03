@@ -48,6 +48,7 @@
     <!-- Waarschuwingen: problemen altijd zichtbaar, aandachtspunten ingeklapt -->
     <div
       v-if="problemWarnings.length > 0"
+      data-presentatie="waarschuwingen"
       class="rounded-lg border p-4"
       :class="hasErrors ? 'border-red-200 bg-red-50' : 'border-amber-200 bg-amber-50'"
       role="alert"
@@ -131,9 +132,10 @@
 
 <script setup lang="ts">
 import KIcon from '../ui/KIcon.vue'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useStructuurStore } from '../../stores/structuurStore'
 import { useProjectStore } from '../../stores/projectStore'
+import { usePresentatieStore } from '../../stores/presentatieStore'
 import type { JourneyFase } from '@shared/types'
 import MenuStructuurBuilder from './MenuStructuurBuilder.vue'
 import PlattegrondCanvas from './PlattegrondCanvas.vue'
@@ -146,6 +148,17 @@ const store = useStructuurStore()
 const projectStore = useProjectStore()
 
 const fase2View = ref<'menu' | 'plattegrond' | 'indeling'>('menu')
+
+// Presentatiemodus: zet de weergave en open de voorbeeldpagina van de huidige stap.
+const presentatie = usePresentatieStore()
+watch(() => [presentatie.doel, store.siteNodes.length] as const, ([d]) => {
+  if (!d || d.fase !== 2) return
+  if (d.fase2View) fase2View.value = d.fase2View
+  if (d.pagina) {
+    const node = store.siteNodes.find(n => n.title === d.pagina)
+    if (node && store.selectedNodeId !== node.id) store.selectedNodeId = node.id
+  }
+}, { immediate: true })
 const fase2Views = [
   { key: 'menu' as const, icon: 'list' as const, label: 'Menu' },
   { key: 'plattegrond' as const, icon: 'sitemap' as const, label: 'Plattegrond' },

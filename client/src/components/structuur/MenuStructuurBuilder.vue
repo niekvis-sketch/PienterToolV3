@@ -83,7 +83,7 @@
 
     <!-- ============ RECHTERPANEEL — MENU-STRUCTUUR ============ -->
     <div class="space-y-3">
-      <div class="card p-4" @dragover.prevent @drop.prevent="onContainerDrop">
+      <div class="card p-4" data-presentatie="menu-structuur" @dragover.prevent @drop.prevent="onContainerDrop">
         <h4 class="font-semibold text-sm text-gray-900">Menu-structuur</h4>
         <p class="mb-3 mt-0.5 text-xs text-gray-500">
           Sleep items om de volgorde te wijzigen. Sleep een item naar rechts, of gebruik de pijlknoppen, om het onder het item erboven te hangen.

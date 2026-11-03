@@ -27,7 +27,7 @@
     </div>
 
     <!-- Statusflow -->
-    <p class="-mt-3 mb-4 text-xs text-gray-500 flex items-center gap-1.5 flex-wrap">
+    <p class="-mt-3 mb-4 text-xs text-gray-500 flex items-center gap-1.5 flex-wrap" data-presentatie="statusflow">
       <span class="font-medium text-gray-600">Van tekst naar klant:</span>
       <span class="badge badge-neutral !h-5">Wordt geschreven</span><KIcon name="chevR" :size="12" />
       <span class="badge badge-warning !h-5">Nakijken door collega</span><KIcon name="chevR" :size="12" />
@@ -43,7 +43,7 @@
     <!-- Spreadsheet tabel: eigen scrollvlak zodat de kop blijft staan tijdens het scrollen -->
     <div class="bg-white rounded-xl border border-gray-200 overflow-auto max-h-[calc(100vh-260px)]">
       <table class="w-full text-sm">
-        <thead class="sticky top-0 z-10">
+        <thead class="sticky top-0 z-10" data-presentatie="tabelkop">
           <tr class="bg-gray-50 border-b border-gray-200">
             <th class="px-2 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-8 bg-gray-50">#</th>
             <th
@@ -51,6 +51,7 @@
               :key="col.key"
               class="px-3 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap bg-gray-50"
               :class="col.width"
+              :data-presentatie="`kolom-${col.key}`"
             >
               {{ col.label }}
             </th>
@@ -329,6 +330,7 @@
 <script setup lang="ts">
 import KIcon from '../ui/KIcon.vue'
 import { ref, computed, onMounted, watch } from 'vue'
+import { usePresentatieStore } from '../../stores/presentatieStore'
 import { useContentStructuurStore } from '../../stores/contentStructuurStore'
 import { useProjectStore } from '../../stores/projectStore'
 import type { ContentStructuurRow, ContentStructuurPreset } from '@shared/types'
@@ -385,6 +387,10 @@ const allColumns = [
 
 // Preset state
 const activePresetId = ref('')
+
+// Presentatiemodus: toon alle kolommen, zodat de uitgelichte kolommen in beeld zijn.
+const presentatie = usePresentatieStore()
+watch(() => presentatie.doel, d => { if (d?.projectTab === 'contentStructuur') activePresetId.value = '' }, { immediate: true })
 const showPresetModal = ref(false)
 const newPresetName = ref('')
 const newPresetColumns = ref<string[]>([])

@@ -21,10 +21,20 @@
           </template>
         </nav>
 
-        <span class="badge badge-highlight-soft shrink-0">
-          <span class="dot"></span>
-          Demo mode
-        </span>
+        <div class="flex items-center gap-3 shrink-0">
+          <button
+            type="button"
+            class="btn-sm"
+            :class="presentatie.actief ? 'btn-primary' : 'btn-secondary'"
+            @click="presentatie.actief ? presentatie.stop() : presentatie.start()"
+          >
+            <KIcon name="slides" :size="14" />{{ presentatie.actief ? 'Presentatie stoppen' : 'Presentatie' }}
+          </button>
+          <span class="badge badge-highlight-soft">
+            <span class="dot"></span>
+            Demo mode
+          </span>
+        </div>
       </header>
 
       <!-- Content -->
@@ -32,6 +42,8 @@
         <router-view />
       </main>
     </div>
+
+    <PresentatieModus />
   </div>
 </template>
 
@@ -41,9 +53,12 @@ import { useRoute } from 'vue-router'
 import { useKlantenStore } from './stores/klantenStore'
 import AppSidebar from './components/AppSidebar.vue'
 import KIcon from './components/ui/KIcon.vue'
+import PresentatieModus from './components/PresentatieModus.vue'
+import { usePresentatieStore } from './stores/presentatieStore'
 
 const route = useRoute()
 const klantenStore = useKlantenStore()
+const presentatie = usePresentatieStore()
 
 watch(() => route.name, async () => {
   if (klantenStore.klanten.length === 0) {

@@ -13,6 +13,7 @@
       <!-- Progress bar steps -->
       <div class="flex items-center gap-0 bg-white rounded-xl border border-gray-200 overflow-hidden">
         <button v-for="(step, idx) in steps" :key="step.fase"
+          :data-presentatie="`fase-stap-${step.fase}`"
           class="flex-1 flex items-center gap-3 px-5 py-4 text-left transition-colors relative"
           :class="{
             'bg-pienter-50 text-pienter-900': currentFase === step.fase,
@@ -104,6 +105,7 @@ import type { IconName } from '../ui/icons'
 import { ref, computed, onMounted, watch } from 'vue'
 import { useStructuurStore } from '../../stores/structuurStore'
 import { useProjectStore } from '../../stores/projectStore'
+import { usePresentatieStore } from '../../stores/presentatieStore'
 import type { StructuurFase, ChangeLogEntry } from '@shared/types'
 import Fase1Vragen from './Fase1Vragen.vue'
 import Fase2Structuur from './Fase2Structuur.vue'
@@ -158,6 +160,12 @@ async function goToFase(fase: StructuurFase) {
   if (!projectId.value) return
   await store.updateProgress(projectId.value, { currentFase: fase })
 }
+
+// Presentatiemodus: open de fase van de huidige stap zodra de voortgang er is.
+const presentatie = usePresentatieStore()
+watch(() => [presentatie.doel, store.progress] as const, ([d]) => {
+  if (d?.fase && store.progress && currentFase.value !== d.fase) goToFase(d.fase)
+}, { immediate: true })
 
 function formatTime(ts: string) {
   const d = new Date(ts)

@@ -5,6 +5,7 @@
       v-for="w in conflicts"
       :key="w.nodeId + (w.relatedNodeId ?? '') + w.type"
       class="rounded-lg border border-red-200 bg-red-50 p-3 flex items-start gap-2.5"
+      data-presentatie="zoekwoord-conflict"
       role="alert"
     >
       <KIcon name="alert" :size="16" class="text-red-600 mt-0.5 shrink-0" />
@@ -22,7 +23,7 @@
     </div>
 
     <!-- Doel van de pagina -->
-    <fieldset>
+    <fieldset data-presentatie="pagina-doel">
       <legend class="label">Doel van de pagina</legend>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" role="radiogroup" aria-label="Doel van de pagina">
         <button
@@ -46,7 +47,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Bouwstatus -->
-      <div>
+      <div data-presentatie="bouwstatus">
         <label class="label" :for="`label-${node.id}`">Bouwen of hergebruiken?</label>
         <select :id="`label-${node.id}`" class="select" :value="node.label" @change="save({ label: ($event.target as HTMLSelectElement).value as SiteNodeLabel })">
           <option v-for="l in LABELS" :key="l.value" :value="l.value">{{ l.label }}</option>
@@ -55,7 +56,7 @@
       </div>
 
       <!-- Focus-zoekwoord -->
-      <div>
+      <div data-presentatie="focus-zoekwoord">
         <label class="label" :for="`focus-${node.id}`">Focus-zoekwoord (SEO)</label>
         <input
           :id="`focus-${node.id}`"
@@ -111,7 +112,7 @@
     </div>
 
     <!-- Functionele eisen -->
-    <div>
+    <div data-presentatie="functionele-eisen">
       <label class="label" :for="`req-${node.id}`">Wat moet deze pagina kunnen?</label>
       <textarea
         :id="`req-${node.id}`"

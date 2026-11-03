@@ -83,7 +83,7 @@
           </div>
 
           <!-- Block list -->
-          <div class="space-y-3 mb-4">
+          <div class="space-y-3 mb-4" data-presentatie="blokken">
             <div v-if="store.pageBlocks.length === 0" class="card p-8 text-center">
               <div class="empty-state-icon"><KIcon name="layers" :size="22" /></div>
               <p class="text-sm text-gray-500 mb-3">Nog geen blokken. Voeg blokken toe om de pagina-indeling te bepalen.</p>
@@ -104,25 +104,28 @@
                 <!-- Editable name -->
                 <input v-if="editingBlockId === block.id" v-model="editBlockName" class="input text-sm font-semibold flex-1"
                   @blur="saveBlockName(block)" @keyup.enter="saveBlockName(block)" />
-                <span v-else class="flex-1 font-semibold text-gray-900 text-sm cursor-pointer" @click="startEditBlockName(block)">
+                <span v-else class="flex-1 font-semibold text-gray-900 text-sm cursor-pointer" :data-presentatie="idx === 0 ? 'blok-naam-type' : undefined" @click="startEditBlockName(block)">
                   {{ block.name }}
                 </span>
                 <!-- Type badge -->
-                <span class="text-[10px] bg-gray-200 text-gray-600 rounded-full px-2 py-0.5">{{ block.type }}</span>
+                <span class="text-[10px] bg-gray-200 text-gray-600 rounded-full px-2 py-0.5" :data-presentatie="idx === 0 ? 'blok-naam-type' : undefined">{{ block.type }}</span>
                 <!-- Hergebruik -->
                 <button
                   v-if="block.reusableBlockId"
+                  :data-presentatie="idx === 0 ? 'herbruikbaar-maken' : undefined"
                   class="badge badge-info !h-5 !text-[10.5px] hover:underline"
                   :title="`Dit blok komt van ${originPageTitle(block)}. Wijzig het daar; de wijziging komt overal door.`"
                   @click="goToOrigin(block)"
                 ><KIcon name="link" :size="11" />Hergebruikt van {{ originPageTitle(block) }}</button>
                 <span
                   v-else-if="block.isReusable"
+                  :data-presentatie="idx === 0 ? 'herbruikbaar-maken' : undefined"
                   class="badge badge-primary !h-5 !text-[10.5px]"
                   :title="usageCount(block) ? 'Wijzigingen aan dit blok komen ook door op de andere pagina\'s.' : 'Andere pagina\'s kunnen dit blok overnemen.'"
                 ><KIcon name="copy" :size="11" />Herbruikbaar{{ usageCount(block) ? ` · ook op ${usageCount(block)} ${usageCount(block) === 1 ? 'pagina' : 'pagina\'s'}` : '' }}</span>
                 <button
                   v-else
+                  :data-presentatie="idx === 0 ? 'herbruikbaar-maken' : undefined"
                   class="text-gray-500 hover:text-pienter-600 text-xs inline-flex items-center gap-1"
                   title="Maak dit blok beschikbaar voor andere pagina's"
                   @click="makeReusable(block)"
@@ -217,7 +220,7 @@
           </div>
 
           <!-- Add block buttons -->
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap gap-2 mb-6" data-presentatie="blokken-snel">
             <button class="btn-primary btn-sm" @click="addBlock"><KIcon name="plus" :size="14" />Blok toevoegen</button>
             <!-- Quick-add popular block types -->
             <button v-for="bt in quickBlockTypes" :key="bt.type" class="btn-secondary btn-sm text-xs" @click="addBlockOfType(bt.type, bt.name)">
@@ -226,7 +229,7 @@
           </div>
 
           <!-- Reusable blocks from other pages -->
-          <div class="card p-4 mb-4">
+          <div class="card p-4 mb-4" data-presentatie="herbruikbaar-lijst">
             <h4 class="text-sm font-semibold text-gray-700 mb-1">Herbruikbaar blok toevoegen</h4>
             <p class="text-xs text-gray-500 mb-3">
               Blokken die op een andere pagina herbruikbaar zijn gemaakt. Je zet ze hier neer zonder ze opnieuw op te bouwen;

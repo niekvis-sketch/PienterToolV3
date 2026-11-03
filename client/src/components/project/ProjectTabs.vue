@@ -10,7 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { usePresentatieStore } from '../../stores/presentatieStore'
 import DetailLayout from '../DetailLayout.vue'
 import StructuurTab from '../tabs/StructuurTab.vue'
 import InstellingenTab from '../tabs/InstellingenTab.vue'
@@ -20,6 +21,10 @@ import ContentStructuurTab from '../tabs/ContentStructuurTab.vue'
 import ConcurrentenTab from '../concurrenten/ConcurrentenTab.vue'
 
 const activeTab = ref('doelgroepen')
+
+// Presentatiemodus: open de tab van de huidige stap.
+const presentatie = usePresentatieStore()
+watch(() => presentatie.doel, d => { if (d) activeTab.value = d.projectTab }, { immediate: true })
 
 const tabs = [
   { key: 'doelgroepen', label: 'Doelgroepen', icon: 'target' },

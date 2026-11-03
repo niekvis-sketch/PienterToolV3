@@ -36,10 +36,11 @@
 
 <script setup lang="ts">
 import KIcon from '../ui/KIcon.vue'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useConcurrentenStore } from '../../stores/concurrenten'
 import { useProjectStore } from '../../stores/projectStore'
 import { useStructuurStore } from '../../stores/structuurStore'
+import { usePresentatieStore } from '../../stores/presentatieStore'
 import ConcurrentInvoer from './ConcurrentInvoer.vue'
 import ConcurrentVergelijking from './ConcurrentVergelijking.vue'
 
@@ -52,6 +53,13 @@ const structuur = useStructuurStore()
 onMounted(() => {
   if (project.currentProject) store.fetch(project.currentProject.id)
 })
+
+// Presentatiemodus: de stap over concurrenten speelt in de invoer. Ook na het
+// laden opnieuw zetten, want fetch kiest zelf een weergave.
+const presentatie = usePresentatieStore()
+watch(() => [presentatie.doel, store.loading] as const, ([d, loading]) => {
+  if (d?.projectTab === 'concurrenten' && !loading) store.actieveSubview = 'invoer'
+}, { immediate: true })
 
 // Spring naar Fase 1 (vraag) of Fase 2 (structuur) in de Structuur-tab.
 async function onJump(payload: { doel: 'structuur' | 'vraag'; targetId: string }) {

@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h3 class="text-lg font-bold text-gray-900">Fase 1 · User stories uit doelgroepen</h3>
+        <h3 class="text-lg font-bold text-gray-900" data-presentatie="fase1-titel">Fase 1 · User stories uit doelgroepen</h3>
         <p class="text-sm text-gray-500 mt-1">Overzicht van alle user stories uit de doelgroep-analyse. Kopieer ze naar ChatGPT, verrijk ze daar en importeer het resultaat terug.</p>
       </div>
       <div class="flex gap-2">

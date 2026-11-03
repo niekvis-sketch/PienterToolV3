@@ -107,6 +107,7 @@ Vaste header met automatisch gegenereerde breadcrumb. Geen statische links — d
 | `/medewerkers` | **Medewerkers** |
 
 - Alle crumbs behalve de laatste zijn `<router-link>` (terugklikbaar). De laatste is in `--ink`; scheidingstekens zijn het `chevR`-icoon.
+- Rechts staat de knop **Presentatie** (zie [Presentatiemodus](#presentatiemodus)).
 - Rechts staat altijd een vaste **"Demo mode"** badge (amber) die zichtbaar markeert dat dit een prototype is met platte JSON-opslag.
 - Op de root-route is geen breadcrumb; in plaats daarvan staat "Pienter Portaal".
 
@@ -240,6 +241,16 @@ Fase 4 en 5 zijn placeholders.
 **Contentplanning** ([ContentStructuurTab.vue](client/src/components/tabs/ContentStructuurTab.vue)) heeft per pagina een schrijver, een nakijker en een controleur bij de klant (`klantControleur`, vrije tekst). De statusflow is: Wordt geschreven → Nakijken door collega (`review`) → Pienterklaar, ligt bij klant (`klaar`) → Klantklaar (`klantklaar`). Bij openen wordt de tabel altijd gesynchroniseerd met de structuur; bestaande rijen zonder `siteNodeId` worden op paginanaam gekoppeld. De kolom Oude URL komt bij die sync uit `SiteNode.redirectsFrom`. De tabelkop blijft staan tijdens het scrollen (eigen scrollvlak).
 
 **Concurrenten** ([ConcurrentInvoer.vue](client/src/components/concurrenten/ConcurrentInvoer.vue)): velden slaan op bij verlaten. De knop Opslaan rechtsonder rondt openstaande invoer af, wacht op alle lopende opslagacties (`concurrentenStore.wachtOpOpslaan`) en toont "Opgeslagen".
+
+### Presentatiemodus
+
+De knop **Presentatie** in de topbar loopt langs de designrequirements en de aanpassingen uit de gebruikerstest. De stappen staan in [presentatieStore.ts](client/src/stores/presentatieStore.ts). [PresentatieModus.vue](client/src/components/PresentatieModus.vue) toont het paneel linksonder, dimt de pagina en licht de onderdelen van de stap uit. Klikken op de pagina blijft gewoon werken.
+
+- Elke stap heeft een `doel`: projecttab, fase, Fase 2-weergave, voorbeeldpagina (op titel) en `targets`.
+- ProjectTabs, StructuurModule, Fase2Structuur, ConcurrentenTab en ContentStructuurTab kijken naar `presentatie.doel` en zetten zelf hun lokale tab-state.
+- Wat uitgelicht wordt, staat in de markup als `data-presentatie="<sleutel>"`. Een `<th>` licht de hele kolom uit.
+- Sta je niet in een Website-project, dan gaat de presentatie naar de klant `DEMO_KLANT` ("Van Lier").
+- Toetsen: pijl links en rechts, Esc stopt.
 
 ---
 

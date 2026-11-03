@@ -39,6 +39,7 @@
             <div class="flex-1 min-w-0">
               <input
                 :value="sel.naam"
+                data-presentatie="concurrent-naam"
                 class="text-lg font-semibold text-gray-900 w-full bg-transparent border-0 border-b border-transparent hover:border-gray-200 focus:border-pienter-500 focus:outline-none px-0"
                 @change="onConcurrentNaam(($event.target as HTMLInputElement).value)"
               />
@@ -114,7 +115,7 @@
       >
         <KIcon :name="saveMelding.ok ? 'checkCircle' : 'close'" :size="16" />{{ saveMelding.tekst }}
       </div>
-      <button class="btn-primary shadow-md" :disabled="saving" @click="opslaan">
+      <button class="btn-primary shadow-md" data-presentatie="concurrent-opslaan" :disabled="saving" @click="opslaan">
         <KIcon name="check" :size="16" />{{ saving ? 'Opslaan…' : 'Opslaan' }}
       </button>
     </div>
